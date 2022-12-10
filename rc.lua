@@ -14,6 +14,8 @@ local beautiful = require("beautiful")
 local naughty = require("naughty")
 local menubar = require("menubar")
 local hotkeys_popup = require("awful.hotkeys_popup")
+
+local dpi = beautiful.xresources.apply_dpi
 -- Enable hotkeys help widget for VIM and other apps
 -- when client with a matching name is opened:
 require("awful.hotkeys_popup.keys")
@@ -104,6 +106,8 @@ menubar.utils.terminal = terminal -- Set the terminal for applications that requ
 mykeyboardlayout = awful.widget.keyboardlayout()
 
 -- {{{ Wibar
+-- Create a separator
+separator = wibox.widget.separator
 -- Create a textclock widget
 mytextclock = wibox.widget.textclock()
 
@@ -196,24 +200,54 @@ awful.screen.connect_for_each_screen(function(s)
     }
 
     -- Create the wibox
-    s.mywibox = awful.wibar({ position = "top", screen = s })
+    s.mywibox = awful.wibar({
+      position = "left",
+      screen = s,
+      bg = "#282c34",
+    })
+
+    -- Wibar Placement
+    --awful.placement.left(s.mywibox, {margins = (beautiful.useless_gap * 2)})
+    --s.mywibox:struts{left = (s.mywibox + beautiful.useless_gap * 2) }
 
     -- Add widgets to the wibox
     s.mywibox:setup {
-        layout = wibox.layout.align.horizontal,
+        layout = wibox.layout.align.vertical,
         { -- Left widgets
-            layout = wibox.layout.fixed.horizontal,
-            mylauncher,
+          mylauncher,
+          {
             s.mytaglist,
-            s.mypromptbox,
+            direction = "west",
+            widget = wibox.container.rotate
+          },  
+          layout = wibox.layout.fixed.vertical,
+            --s.mypromptbox,
         },
-        s.mytasklist, -- Middle widget
+        {
+          layout = separator -- Middle widget
+        },
         { -- Right widgets
-            layout = wibox.layout.fixed.horizontal,
+          layout = wibox.layout.fixed.vertical,
+          {
             mykeyboardlayout,
+            direction = "east",
+            widget = wibox.container.rotate
+          },
+          {
             wibox.widget.systray(),
+            direction = "west",
+            widget = wibox.container.rotate
+          },
+          {
             mytextclock,
+            direction = "east",
+            widget = wibox.container.rotate
+          },
+          {
             s.mylayoutbox,
+            direction = "west",
+            widget = wibox.container.rotate
+          },
         },
     }
 end)
