@@ -145,6 +145,7 @@ local tasklist_buttons = gears.table.join(
                                               awful.client.focus.byidx(-1)
                                           end))
 
+-- This function is dead for this config because I use "feh" for my wallpaper
 local function set_wallpaper(s)
     -- Wallpaper
     if beautiful.wallpaper then
@@ -156,13 +157,14 @@ local function set_wallpaper(s)
         gears.wallpaper.maximized(wallpaper, s, true)
     end
 end
+-- This function is dead for this config because I use "feh" for my wallpaper
 
 -- Re-set wallpaper when a screen's geometry changes (e.g. different resolution)
-screen.connect_signal("property::geometry", set_wallpaper)
+--screen.connect_signal("property::geometry", set_wallpaper)
 
 awful.screen.connect_for_each_screen(function(s)
     -- Wallpaper
-    set_wallpaper(s)
+    --set_wallpaper(s)
 
     -- Each screen has its own tag table.
     awful.tag({ "1", "2", "3", "4", "5", "6", "7", "8", "9" }, s, awful.layout.layouts[1])
@@ -559,3 +561,6 @@ client.connect_signal("focus", function(c) c.border_color = beautiful.border_foc
 client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
 -- }}}
 
+--Wallpaper Custom
+local Wallpaper_cmd = "feh --bg-fill $HOME/.config/awesome/onedark_wallpaper.png"
+os.execute(Wallpaper_cmd)
