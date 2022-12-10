@@ -231,7 +231,7 @@ awful.screen.connect_for_each_screen(function(s)
     })
 
     -- Wibar Placement
-    awful.placement.left(s.mywibox, {margins = {left = 8, right = 14}})
+    awful.placement.left(s.mywibox, {margins = {left = 8, right = 14, top = 10, bottom = 10}})
 
     -- Add widgets to the wibox
     s.mywibox:setup {
@@ -578,7 +578,7 @@ client.connect_signal("manage", function (c)
     -- Set the windows at the slave,
     -- i.e. put it at the end of others instead of setting it master.
     -- if not awesome.startup then awful.client.setslave(c) end
-
+    c.shape = gears.shape.rounded_rect
     if awesome.startup
       and not c.size_hints.user_position
       and not c.size_hints.program_position then
