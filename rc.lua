@@ -214,7 +214,8 @@ awful.screen.connect_for_each_screen(function(s)
           shape = gears.shape.rounded_bar,
           bg_focus = "#1D2025",
           fg_focus = "#BE5046",
-          font = "JetBrains 30"
+          font = "JetBrains 30",
+          fg_occupied = "#61AFEF"
         },
     }
 
