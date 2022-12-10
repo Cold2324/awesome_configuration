@@ -107,9 +107,24 @@ mykeyboardlayout = awful.widget.keyboardlayout()
 
 -- {{{ Wibar
 -- Create a separator
-separator = wibox.widget.separator
+separator = wibox.widget.separator({visible = false})
+
+-- create textbox
+textbox = wibox.widget.textbox
+
 -- Create a textclock widget
-mytextclock = wibox.widget.textclock()
+mytextclock = wibox.widget {
+  {
+    widget = wibox.widget.textclock,
+    format = "%I:",
+  },
+  {
+    widget = wibox.widget.textclock,
+    format = "%M",
+  },
+  layout = wibox.layout.fixed.horizontal,
+  spacing = dpi(3)
+}
 
 -- Create a wibox for each screen and add it
 local taglist_buttons = gears.table.join(
@@ -189,7 +204,13 @@ awful.screen.connect_for_each_screen(function(s)
     s.mytaglist = awful.widget.taglist {
         screen  = s,
         filter  = awful.widget.taglist.filter.all,
-        buttons = taglist_buttons
+        buttons = taglist_buttons,
+        style = {
+          shape = gears.shape.rounded_bar,
+          bg_focus = "#1D2025",
+          fg_focus = "#BE5046",
+          font = "JetBrains 30"
+        },
     }
 
     -- Create a tasklist widget
@@ -203,18 +224,20 @@ awful.screen.connect_for_each_screen(function(s)
     s.mywibox = awful.wibar({
       position = "left",
       screen = s,
-      bg = "#282c34",
+      bg = "#1D2025",
+      width = 30,
+      border_color = "#1D2025",
+      border_width = 10,
     })
 
     -- Wibar Placement
-    --awful.placement.left(s.mywibox, {margins = (beautiful.useless_gap * 2)})
-    --s.mywibox:struts{left = (s.mywibox + beautiful.useless_gap * 2) }
+    awful.placement.left(s.mywibox, {margins = {left = 8, right = 14}})
 
     -- Add widgets to the wibox
     s.mywibox:setup {
         layout = wibox.layout.align.vertical,
         { -- Left widgets
-          mylauncher,
+          --mylauncher,
           {
             s.mytaglist,
             direction = "west",
@@ -234,12 +257,22 @@ awful.screen.connect_for_each_screen(function(s)
             widget = wibox.container.rotate
           },
           {
+            textbox(" | "),
+            direction = "east",
+            widget = wibox.container.rotate
+          },
+          {
             wibox.widget.systray(),
             direction = "west",
             widget = wibox.container.rotate
           },
           {
             mytextclock,
+            direction = "east",
+            widget = wibox.container.rotate
+          },
+          {
+            textbox(" | "),
             direction = "east",
             widget = wibox.container.rotate
           },
