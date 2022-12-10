@@ -106,6 +106,11 @@ menubar.utils.terminal = terminal -- Set the terminal for applications that requ
 mykeyboardlayout = awful.widget.keyboardlayout()
 
 -- {{{ Wibar
+-- borders rounded
+newshape = function (cr, width, height)
+  gears.shape.rounded_rect(cr, width, height, 12)
+end
+
 -- Create a separator
 separator = wibox.widget.separator({visible = false})
 
@@ -226,8 +231,10 @@ awful.screen.connect_for_each_screen(function(s)
       screen = s,
       bg = "#1D2025",
       width = 30,
+      height = 720,
       border_color = "#1D2025",
       border_width = 10,
+      shape = newshape
     })
 
     -- Wibar Placement
