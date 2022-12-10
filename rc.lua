@@ -46,9 +46,11 @@ end
 -- {{{ Variable definitions
 -- Themes define colours, icons, font and wallpapers.
 beautiful.init(gears.filesystem.get_themes_dir() .. "default/theme.lua")
+beautiful.useless_gap = 8
+beautiful.font = "Hack 12"
 
 -- This is used later as the default terminal and editor to run.
-terminal = "xterm"
+terminal = "kitty"
 editor = os.getenv("EDITOR") or "vi"
 editor_cmd = terminal .. " -e " .. editor
 
@@ -68,15 +70,24 @@ awful.layout.layouts = {
 -- {{{ Menu
 -- Create a launcher widget and a main menu
 myawesomemenu = {
-   { "hotkeys", function() hotkeys_popup.show_help(nil, awful.screen.focused()) end },
-   { "manual", terminal .. " -e man awesome" },
-   { "edit config", editor_cmd .. " " .. awesome.conffile },
-   { "restart", awesome.restart },
-   { "quit", function() awesome.quit() end },
+   { "Hotkeys", function() hotkeys_popup.show_help(nil, awful.screen.focused()) end },
+   { "Manual", terminal .. " -e man awesome" },
+   { "Edit config", editor_cmd .. " " .. awesome.conffile },
+   { "Restart", awesome.restart },
+   { "Quit", function() awesome.quit() end },
 }
 
-mymainmenu = awful.menu({ items = { { "awesome", myawesomemenu, beautiful.awesome_icon },
-                                    { "open terminal", terminal }
+-- Theme Awesome Menu
+beautiful.menu_height = 30
+beautiful.menu_width = 180
+beautiful.menu_bg_normal = "#374247"
+beautiful.menu_bg_focus = "#282c34"
+beautiful.menu_fg_focus = "#374247"
+
+mymainmenu = awful.menu({ items = { { "  Awesome", myawesomemenu },
+                                    { "  Open terminal", terminal },
+                                    { "  Browser", "google-chrome"},
+                                    { "  Files", "nautilus"}
                                   }
                         })
 
@@ -547,3 +558,4 @@ end)
 client.connect_signal("focus", function(c) c.border_color = beautiful.border_focus end)
 client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
 -- }}}
+
