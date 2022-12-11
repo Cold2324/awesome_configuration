@@ -608,6 +608,10 @@ client.connect_signal("focus", function(c) c.border_color = beautiful.border_foc
 client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
 -- }}}
 
+-----------------------------------Auto Start-------------------------------------------
+-- Set Keymap
+os.execute("setxkbmap us")
+
 --Wallpaper Custom
 --local Wallpaper_cmd = "feh --bg-fill $HOME/.config/awesome/onedark_wallpaper.png"
 --os.execute(Wallpaper_cmd)
