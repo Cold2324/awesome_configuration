@@ -56,15 +56,15 @@ end
 
 -- {{{ Variable definitions
 -- Themes define colours, icons, font and wallpapers.
-beautiful.init(gears.filesystem.get_themes_dir() .. "default/theme.lua")
-beautiful.useless_gap = 8
-beautiful.font = "Hack 12"
+--beautiful.init(gears.filesystem.get_themes_dir() .. "default/theme.lua")
+beautiful.init('/home/cold/.config/awesome/theme/theme.lua')
 
 -- This is used later as the default terminal and editor to run.
 terminal = "kitty"
 browser = "google-chrome"
 files_manager = "nautilus"
-editor = os.getenv("EDITOR") or "vi"
+--editor = os.getenv("EDITOR") or "nvim"
+editor = "/usr/bin/nvim"
 editor_cmd = terminal .. " -e " .. editor
 modkey = "Mod4"
 
