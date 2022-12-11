@@ -194,7 +194,7 @@ end
 
 awful.screen.connect_for_each_screen(function(s)
     -- Wallpaper
-    --set_wallpaper(s)
+    set_wallpaper(s)
 
     -- Each screen has its own tag table.
     awful.tag({ "", "", "", "", "" }, s, awful.layout.layouts[1])
@@ -609,5 +609,5 @@ client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_n
 -- }}}
 
 --Wallpaper Custom
-local Wallpaper_cmd = "feh --bg-fill $HOME/.config/awesome/onedark_wallpaper.png"
-os.execute(Wallpaper_cmd)
+--local Wallpaper_cmd = "feh --bg-fill $HOME/.config/awesome/onedark_wallpaper.png"
+--os.execute(Wallpaper_cmd)
