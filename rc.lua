@@ -61,9 +61,8 @@ beautiful.init('/home/cold/.config/awesome/theme/theme.lua')
 
 -- This is used later as the default terminal and editor to run.
 terminal = "kitty"
-browser = "google-chrome"
-files_manager = "nautilus"
---editor = os.getenv("EDITOR") or "nvim"
+browser = "firefox"
+files_manager = "thunar"
 editor = "/usr/bin/nvim"
 editor_cmd = terminal .. " -e " .. editor
 modkey = "Mod4"
@@ -175,7 +174,6 @@ local tasklist_buttons = gears.table.join(
                                               awful.client.focus.byidx(-1)
                                           end))
 
--- This function is dead for this config because I use "feh" for my wallpaper
 local function set_wallpaper(s)
     -- Wallpaper
     if beautiful.wallpaper then
@@ -187,10 +185,6 @@ local function set_wallpaper(s)
         gears.wallpaper.maximized(wallpaper, s, true)
     end
 end
--- This function is dead for this config because I use "feh" for my wallpaper
-
--- Re-set wallpaper when a screen's geometry changes (e.g. different resolution)
---screen.connect_signal("property::geometry", set_wallpaper)
 
 awful.screen.connect_for_each_screen(function(s)
     -- Wallpaper
