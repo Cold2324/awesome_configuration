@@ -125,7 +125,7 @@ textbox = wibox.widget.textbox
 mytextclock = wibox.widget {
   {
     widget = wibox.widget.textclock,
-    format = "%I:",
+    format = "%H:",
   },
   {
     widget = wibox.widget.textclock,
