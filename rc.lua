@@ -25,6 +25,9 @@ local menubar = require("menubar")
 local hotkeys_popup = require("awful.hotkeys_popup")
 
 local dpi = beautiful.xresources.apply_dpi
+
+require('menu_bar.setup')
+
 -- Enable hotkeys help widget for VIM and other apps
 -- when client with a matching name is opened:
 require("awful.hotkeys_popup.keys")
@@ -239,61 +242,9 @@ awful.screen.connect_for_each_screen(function(s)
     -- Wibar Placement
     awful.placement.left(s.mywibox, {margins = {left = 8, right = 14, top = 10, bottom = 10}})
 
-    -- Add widgets to the wibox
-    s.mywibox:setup {
-        layout = wibox.layout.align.vertical,
-        { -- Left widgets
-          --mylauncher,
-          {
-            s.mytaglist,
-            direction = "west",
-            widget = wibox.container.rotate
-          },  
-          layout = wibox.layout.fixed.vertical,
-            --s.mypromptbox,
-        },
-        {
-          layout = separator -- Middle widget
-        },
-        { -- Right widgets
-          layout = wibox.layout.fixed.vertical,
-          {
-            mykeyboardlayout,
-            direction = "east",
-            widget = wibox.container.rotate
-          },
-          {
-            textbox(" | "),
-            direction = "east",
-            widget = wibox.container.rotate
-          },
-          {
-            wibox.widget.systray(),
-            direction = "west",
-            widget = wibox.container.rotate
-          },
-          {
-            textbox(" | "),
-            direction = "east",
-            widget = wibox.container.rotate
-          },
-          {
-            mytextclock,
-            direction = "east",
-            widget = wibox.container.rotate
-          },
-          {
-            textbox(" | "),
-            direction = "east",
-            widget = wibox.container.rotate
-          },
-          {
-            s.mylayoutbox,
-            direction = "west",
-            widget = wibox.container.rotate
-          },
-        },
-    }
+    --setup
+    setup_menu(s, wibox)
+
 end)
 -- }}}
 
