@@ -89,17 +89,20 @@ myawesomemenu = {
 
 -- Theme Awesome Menu
 beautiful.menu_height = 30
-beautiful.menu_width = 180
+beautiful.menu_width = 220
 beautiful.menu_bg_normal = "#1D2025"
 beautiful.menu_bg_focus = "#282c34"
 beautiful.menu_fg_focus = "#CCCCCC"
 
 mymainmenu = awful.menu({
   items = {
-    { "  Awesome", myawesomemenu },
-    { "  Open terminal", terminal },
-    { "  Browser", browser},
-    { "  Files", files_manager}
+    --{ "  Awesome", myawesomemenu },
+    --{ "  Open terminal", terminal },
+    --{ "  Browser", browser},
+    --{ "  Files", files_manager},
+    { "  Quick Awesome", function() awesome.quit() end},
+    { "  Reboot", 'systemctl reboot'},
+    { " ⏻ Power Off", 'systemctl poweroff'}
   }
 })
 
