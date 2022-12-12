@@ -94,15 +94,19 @@ beautiful.menu_bg_normal = "#374247"
 beautiful.menu_bg_focus = "#282c34"
 beautiful.menu_fg_focus = "#374247"
 
-mymainmenu = awful.menu({ items = { { "  Awesome", myawesomemenu },
-                                    { "  Open terminal", terminal },
-                                    { "  Browser", browser},
-                                    { "  Files", files_manager}
-                                  }
-                        })
+mymainmenu = awful.menu({
+  items = {
+    { "  Awesome", myawesomemenu },
+    { "  Open terminal", terminal },
+    { "  Browser", browser},
+    { "  Files", files_manager}
+  }
+})
 
-mylauncher = awful.widget.launcher({ image = beautiful.awesome_icon,
-                                     menu = mymainmenu })
+mylauncher = awful.widget.launcher({
+  image = '/home/cold/.config/awesome/assets/power_off.png',
+  menu = mymainmenu
+})
 
 -- Menubar configuration
 menubar.utils.terminal = terminal -- Set the terminal for applications that require it
@@ -114,7 +118,7 @@ newshape = function (cr, width, height)
   gears.shape.rounded_rect(cr, width, height, 12)
 end
 
--- function wibox container Custom
+-- handle rotate of widgets
 local function handle_widget_rotate(widget, direction)
   return wibox.container.rotate(widget, direction)
 end

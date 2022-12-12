@@ -1,6 +1,6 @@
 local function set_left_widgets(s, wibox)
   local left_widget = {
-    --mylauncher,
+    mylauncher,
     {
       s.mytaglist,
       direction = "west",
