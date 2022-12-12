@@ -108,23 +108,31 @@ mylauncher = awful.widget.launcher({ image = beautiful.awesome_icon,
 menubar.utils.terminal = terminal -- Set the terminal for applications that require it
 -- }}}
 
--- Keyboard map indicator and switcher
-mykeyboardlayout = awful.widget.keyboardlayout()
-
 -- {{{ Wibar
 -- borders rounded
 newshape = function (cr, width, height)
   gears.shape.rounded_rect(cr, width, height, 12)
 end
 
+-- function wibox container Custom
+local function handle_widget_rotate(widget, direction)
+  return wibox.container.rotate(widget, direction)
+end
+
+-- Keyboard map indicator and switcher
+mykeyboardlayout = handle_widget_rotate(awful.widget.keyboardlayout(), "east")
+
 -- Create a separator
 separator = wibox.widget.separator({visible = false})
 
--- create textbox
-textbox = wibox.widget.textbox
+-- create pipe separator for the widgets
+pipe_sep = handle_widget_rotate(wibox.widget.textbox(' | '), 'east')
+
+-- systray widget
+systray = handle_widget_rotate(wibox.widget.systray(), 'west')
 
 -- Create a textclock widget
-mytextclock = wibox.widget {
+mytextclock = handle_widget_rotate(wibox.widget {
   {
     widget = wibox.widget.textclock,
     format = "%H:",
@@ -135,7 +143,7 @@ mytextclock = wibox.widget {
   },
   layout = wibox.layout.fixed.horizontal,
   spacing = dpi(3)
-}
+}, 'east')
 
 -- Create a wibox for each screen and add it
 local taglist_buttons = gears.table.join(

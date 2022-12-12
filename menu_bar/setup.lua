@@ -7,7 +7,6 @@ local function set_left_widgets(s, wibox)
       widget = wibox.container.rotate
     },
     layout = wibox.layout.fixed.vertical,
-      --s.mypromptbox,
   }
   return left_widget
 end
@@ -15,36 +14,12 @@ end
 local function set_right_widget(s, wibox)
   local right_widget = {
     layout = wibox.layout.fixed.vertical,
-    {
-      mykeyboardlayout,
-      direction = "east",
-      widget = wibox.container.rotate
-    },
-    {
-      textbox(" | "),
-      direction = "east",
-      widget = wibox.container.rotate
-    },
-    {
-      wibox.widget.systray(),
-      direction = "west",
-      widget = wibox.container.rotate
-    },
-    {
-      textbox(" | "),
-      direction = "east",
-      widget = wibox.container.rotate
-    },
-    {
-      mytextclock,
-      direction = "east",
-      widget = wibox.container.rotate
-    },
-    {
-      textbox(" | "),
-      direction = "east",
-      widget = wibox.container.rotate
-    },
+    mykeyboardlayout,
+    pipe_sep,
+    systray,
+    pipe_sep,
+    mytextclock,
+    pipe_sep,
     {
       s.mylayoutbox,
       direction = "west",
