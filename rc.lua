@@ -121,40 +121,6 @@ newshape = function (cr, width, height)
   gears.shape.rounded_rect(cr, width, height, 12)
 end
 
--- handle rotate of widgets
-local function handle_widget_rotate(widget, direction)
-  return wibox.container.rotate(widget, direction)
-end
-
-mykeyboardlayout = handle_widget_rotate(awful.widget.keyboardlayout(), "east")
--- mykeyboardlayout:connect_signal(
---     'button::press',
---     function () end
--- )
-
--- Create a separator
-separator = wibox.widget.separator({visible = false})
-
--- create pipe separator for the widgets
-pipe_sep = handle_widget_rotate(wibox.widget.textbox(' | '), 'east')
-
--- systray widget
-systray = handle_widget_rotate(wibox.widget.systray(), 'west')
-
--- Create a textclock widget
-mytextclock = handle_widget_rotate(wibox.widget {
-  {
-    widget = wibox.widget.textclock,
-    format = "%H:",
-  },
-  {
-    widget = wibox.widget.textclock,
-    format = "%M",
-  },
-  layout = wibox.layout.fixed.horizontal,
-  spacing = dpi(3)
-}, 'east')
-
 -- Create a wibox for each screen and add it
 local taglist_buttons = gears.table.join(
                     awful.button({ }, 1, function(t) t:view_only() end),

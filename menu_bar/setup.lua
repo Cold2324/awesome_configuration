@@ -1,3 +1,5 @@
+local widgets = require('widgets')
+
 local function set_left_widgets(s, wibox)
   local left_widget = {
     mylauncher,
@@ -12,15 +14,26 @@ local function set_left_widgets(s, wibox)
 end
 
 local function set_right_widget(s, wibox)
+  local battery = {
+    widgets.battery {
+      ac_prefix = '',
+      widget_font = 'Hack 12',
+      battery_prefix = ''
+    },
+    direction = "east",
+    widget = wibox.container.rotate
+  }
+
   local right_widget = {
     layout = wibox.layout.fixed.vertical,
-    mykeyboardlayout,
-    pipe_sep,
-    systray,
-    pipe_sep,
-    mytextclock,
-    pipe_sep,
-    require("widgets.battery_widget") {},
+    widgets.keyboard(),
+    widgets.pipe_sep(),
+    widgets.systray(),
+    widgets.pipe_sep(),
+    widgets.clock(),
+    widgets.pipe_sep(),
+    battery,
+    widgets.pipe_sep(),
     {
       s.mylayoutbox,
       direction = "west",
@@ -36,7 +49,7 @@ function setup_menu(s, wibox)
       layout = wibox.layout.align.vertical,
       set_left_widgets(s, wibox),
       {
-        layout = separator -- Middle widget
+        layout = widgets.separator() -- Middle widget
       },
       set_right_widget(s, wibox)
   }
