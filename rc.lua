@@ -126,8 +126,11 @@ local function handle_widget_rotate(widget, direction)
   return wibox.container.rotate(widget, direction)
 end
 
--- Keyboard map indicator and switcher
 mykeyboardlayout = handle_widget_rotate(awful.widget.keyboardlayout(), "east")
+-- mykeyboardlayout:connect_signal(
+--     'button::press',
+--     function () end
+-- )
 
 -- Create a separator
 separator = wibox.widget.separator({visible = false})

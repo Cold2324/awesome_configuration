@@ -20,6 +20,7 @@ local function set_right_widget(s, wibox)
     pipe_sep,
     mytextclock,
     pipe_sep,
+    require("widgets.battery_widget") {},
     {
       s.mylayoutbox,
       direction = "west",
