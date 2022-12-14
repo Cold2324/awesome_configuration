@@ -20,5 +20,3 @@ function create_left_wibox(s)
 
     setup(s, wibox)
 end
-
-return create_left_wibox
