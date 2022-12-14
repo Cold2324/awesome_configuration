@@ -36,7 +36,7 @@ function create_taglist(s)
     buttons = taglist_buttons,
     style = {
       shape = gears.shape.rounded_bar,
-      bg_focus = "#1D2025",
+      bg_focus = "#282C34",
       fg_focus = "#BE5046",
       font = "JetBrains 30",
       fg_occupied = "#61AFEF"
