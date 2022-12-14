@@ -31,8 +31,8 @@ local function set_left_widgets(s, wibox)
           direction = "west",
           widget = wibox.container.rotate
         },
-        top = 12,
-        bottom = 12,
+        top = 10,
+        bottom = 10,
         widget = wibox.container.margin
       },
       bg = '#282C34',
