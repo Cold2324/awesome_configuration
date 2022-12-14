@@ -13,7 +13,7 @@ function create_left_wibox(s)
       position = "left",
       screen = s,
       bg = "#1D2025",
-      width = 30,
+      width = 37,
       height = 720,
       border_color = "#1D2025",
       border_width = 10,

@@ -151,7 +151,7 @@ function battery_widget:init(args)
 
     self.widget = wibox.widget.textbox()
     self.widget.set_align("right")
-    self.widget.font = args.widget_font
+    self.widget.font = 'Hack Bold 16'
     self.tooltip = awful.tooltip({objects={self.widget}})
 
     self.warn_full_battery = args.warn_full_battery
