@@ -1,20 +1,11 @@
 local wibox = require('wibox')
-
 function set_clock()
-  local clock = wibox.container.rotate(wibox.widget {
-      {
-        widget = wibox.widget.textclock,
-        format = "%H:",
-      },
-      {
-        widget = wibox.widget.textclock,
-        format = "%M",
-      },
-      layout = wibox.layout.fixed.horizontal,
-      spacing = 3
-    },
-    'east'
-  )
+  local clock = wibox.widget {
+    format = '%H %M',
+    align = 'center',
+    font = 'Hack Bold 16',
+    widget = wibox.widget.textclock
+  }
   return clock
 end
 

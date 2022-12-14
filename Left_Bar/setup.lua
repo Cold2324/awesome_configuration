@@ -1,5 +1,6 @@
 local widgets = require('widgets')
 local awful = require('awful')
+require('widgets.wifi')
 
 local function set_left_widgets(s, wibox)
   local system_menu = awful.menu({
@@ -43,6 +44,8 @@ local function set_right_widget(s, wibox)
     widgets.keyboard(),
     widgets.pipe_sep(),
     widgets.systray(),
+    widgets.pipe_sep(),
+    widgets.wifi,
     widgets.pipe_sep(),
     widgets.clock(),
     widgets.pipe_sep(),
