@@ -41,15 +41,13 @@ local function set_right_widget(s, wibox)
 
   local right_widget = {
     layout = wibox.layout.fixed.vertical,
-    widgets.keyboard(),
-    widgets.pipe_sep(),
     widgets.systray(),
     widgets.pipe_sep(),
-    widgets.wifi,
-    widgets.pipe_sep(),
-    widgets.clock(),
+    -- widgets.wifi,
     widgets.pipe_sep(),
     battery,
+    widgets.pipe_sep(),
+    widgets.clock(),
     widgets.pipe_sep(),
     {
       s.mylayoutbox,
