@@ -24,42 +24,37 @@ require('configs.error_handling')
 -- Enable hotkeys help widget for VIM and other apps
 -- when client with a matching name is opened:
 require("awful.hotkeys_popup.keys")
-
--- {{{ Variable definitions
 beautiful.init(config_directory .. '/theme/theme.lua')
-
--- Table of layouts to cover with awful.layout.inc, order matters.
-awful.layout.layouts = {
-    awful.layout.suit.tile,
-    awful.layout.suit.floating,
-}
--- }}}
+require('configs.layouts_table')
 
 -- {{{ Menu
 -- Create a launcher widget and a main menu
-myawesomemenu = {
+awesome_menu = {
    { "Hotkeys", function() hotkeys_popup.show_help(nil, awful.screen.focused()) end },
    { "Manual", terminal .. " -e man awesome" },
-   { "Edit config", editor_cmd .. " " .. awesome.conffile },
-   { "Restart", awesome.restart },
-   { "Quit", function() awesome.quit() end },
+   { "Edit config", editor_cmd .. " " .. awesome.conffile }
 }
 
 mymainmenu = awful.menu({
   items = {
-    --{ "  Awesome", myawesomemenu },
-    --{ "  Open terminal", terminal },
-    --{ "  Browser", browser},
-    --{ "  Files", files_manager},
+    { "  Awesome", awesome_menu },
+    { "  Open terminal", terminal },
+    { "  Browser", browser},
+    { "  Files", files_manager},
+  }
+})
+
+local system_menu = awful.menu({
+  items = {
     { "  Quick Awesome", function() awesome.quit() end},
     { "  Reboot", 'systemctl reboot'},
     { " ⏻ Power Off", 'systemctl poweroff'}
   }
 })
 
-mylauncher = awful.widget.launcher({
+system_launcher = awful.widget.launcher({
   image = config_directory .. '/assets/power_off.png',
-  menu = mymainmenu
+  menu = system_menu
 })
 
 -- Menubar configuration

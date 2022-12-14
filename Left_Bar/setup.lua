@@ -2,7 +2,7 @@ local widgets = require('widgets')
 
 local function set_left_widgets(s, wibox)
   local left_widget = {
-    mylauncher,
+    system_launcher,
     {
       s.mytaglist,
       direction = "west",
