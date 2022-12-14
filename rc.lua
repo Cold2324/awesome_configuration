@@ -18,6 +18,17 @@ local beautiful = require("beautiful")
 local menubar = require("menubar")
 local hotkeys_popup = require("awful.hotkeys_popup")
 
+-- Global Variables
+user = 'cold'
+config_directory = '/home/' .. user .. '/.config/awesome'
+terminal = "kitty"
+browser = "firefox"
+files_manager = "thunar"
+editor = "/usr/bin/nvim"
+editor_cmd = terminal .. " -e " .. editor
+modkey = "Mod1"
+-- Global Variables
+
 require('Left_Bar.setup')
 require('configs.error_handling')
 -- Enable hotkeys help widget for VIM and other apps
@@ -25,13 +36,7 @@ require('configs.error_handling')
 require("awful.hotkeys_popup.keys")
 
 -- {{{ Variable definitions
-beautiful.init('/home/cold/.config/awesome/theme/theme.lua')
-terminal = "kitty"
-browser = "firefox"
-files_manager = "thunar"
-editor = "/usr/bin/nvim"
-editor_cmd = terminal .. " -e " .. editor
-modkey = "Mod1"
+beautiful.init(config_directory .. '/theme/theme.lua')
 
 -- Table of layouts to cover with awful.layout.inc, order matters.
 awful.layout.layouts = {
@@ -63,7 +68,7 @@ mymainmenu = awful.menu({
 })
 
 mylauncher = awful.widget.launcher({
-  image = '/home/cold/.config/awesome/assets/power_off.png',
+  image = config_directory .. '/assets/power_off.png',
   menu = mymainmenu
 })
 
@@ -193,34 +198,6 @@ require('Bindings')
 
 require('configs.rules')
 
--- {{{ Signals
--- Signal function to execute when a new client appears.
-client.connect_signal("manage", function (c)
-    -- Set the windows at the slave,
-    -- i.e. put it at the end of others instead of setting it master.
-    -- if not awesome.startup then awful.client.setslave(c) end
-    c.shape = gears.shape.rounded_rect
-    if awesome.startup
-      and not c.size_hints.user_position
-      and not c.size_hints.program_position then
-        -- Prevent clients from being unreachable after screen count changes.
-        awful.placement.no_offscreen(c)
-    end
-end)
+require('clients.signals')
 
--- Enable sloppy focus, so that focus follows mouse.
-client.connect_signal("mouse::enter", function(c)
-    c:emit_signal("request::activate", "mouse_enter", {raise = false})
-end)
-
-client.connect_signal("focus", function(c) c.border_color = beautiful.border_focus end)
-client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
--- }}}
-
------------------------------------Auto Start-------------------------------------------
--- Set Keymap
-os.execute("setxkbmap us")
-
---Wallpaper Custom
---local Wallpaper_cmd = "feh --bg-fill $HOME/.config/awesome/onedark_wallpaper.png"
---os.execute(Wallpaper_cmd)
+os.execute(config_directory .. "/autostart.sh")
