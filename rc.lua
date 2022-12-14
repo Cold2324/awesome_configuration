@@ -13,7 +13,6 @@ pcall(require, "luarocks.loader")
 local gears = require("gears")
 local awful = require("awful")
 require("awful.autofocus")
-local wibox = require("wibox")
 local beautiful = require("beautiful")
 local menubar = require("menubar")
 local hotkeys_popup = require("awful.hotkeys_popup")
@@ -29,7 +28,9 @@ editor_cmd = terminal .. " -e " .. editor
 modkey = "Mod1"
 -- Global Variables
 
-require('Left_Bar.setup')
+local widgets = require('widgets')
+
+require('Left_Bar.create_left_wibox')
 require('configs.error_handling')
 -- Enable hotkeys help widget for VIM and other apps
 -- when client with a matching name is opened:
@@ -151,44 +152,11 @@ awful.screen.connect_for_each_screen(function(s)
                            awful.button({ }, 3, function () awful.layout.inc(-1) end),
                            awful.button({ }, 4, function () awful.layout.inc( 1) end),
                            awful.button({ }, 5, function () awful.layout.inc(-1) end)))
-    -- Create a taglist widget
-    s.mytaglist = awful.widget.taglist {
-        screen  = s,
-        filter  = awful.widget.taglist.filter.all,
-        buttons = taglist_buttons,
-        style = {
-          shape = gears.shape.rounded_bar,
-          bg_focus = "#1D2025",
-          fg_focus = "#BE5046",
-          font = "JetBrains 30",
-          fg_occupied = "#61AFEF"
-        },
-    }
 
-    -- Create a tasklist widget
-    s.mytasklist = awful.widget.tasklist {
-        screen  = s,
-        filter  = awful.widget.tasklist.filter.currenttags,
-        buttons = tasklist_buttons
-    }
+    widgets.taglist(s, taglist_buttons)
+    widgets.tasklist(s, tasklist_buttons)
 
-    -- Create the wibox
-    s.mywibox = awful.wibar({
-      position = "left",
-      screen = s,
-      bg = "#1D2025",
-      width = 30,
-      height = 720,
-      border_color = "#1D2025",
-      border_width = 10,
-      shape = newshape
-    })
-
-    -- Wibar Placement
-    awful.placement.left(s.mywibox, {margins = {left = 8, right = 14, top = 10, bottom = 10}})
-
-    --setup
-    setup_menu(s, wibox)
+    create_left_wibox(s)
 
 end)
 -- }}}

@@ -54,3 +54,5 @@ function setup_menu(s, wibox)
       set_right_widget(s, wibox)
   }
 end
+
+return setup_menu
