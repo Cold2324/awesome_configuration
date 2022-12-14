@@ -1,6 +1,20 @@
 local widgets = require('widgets')
+local awful = require('awful')
 
 local function set_left_widgets(s, wibox)
+  local system_menu = awful.menu({
+    items = {
+      { "  Quick Awesome", function() awesome.quit() end},
+      { "  Reboot", 'systemctl reboot'},
+      { " ⏻ Power Off", 'systemctl poweroff'}
+    }
+  })
+  
+  local system_launcher = awful.widget.launcher({
+    image = config_directory .. '/assets/power_off.png',
+    menu = system_menu
+  })
+  
   local left_widget = {
     system_launcher,
     {

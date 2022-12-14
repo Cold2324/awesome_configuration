@@ -15,33 +15,31 @@ local Brightness_Control = {
 }
 
 globalkeys = gears.table.join(
-    Key({ modkey,           }, "s",      hotkeys_popup.show_help,
-              {description="show help", group="awesome"}),
-    -- Key({ modkey,           }, "Left",   awful.tag.viewprev,
-    --           {description = "view previous", group = "tag"}),
-    -- Key({ modkey,           }, "Right",  awful.tag.viewnext,
-            --   {description = "view next", group = "tag"}),
-    Key({ modkey,           }, "Escape", awful.tag.history.restore,
-              {description = "go back", group = "tag"}),
-
-    Key({ modkey,           }, "j",
+    Key({modkey}, "s", hotkeys_popup.show_help, {description="show help", group="awesome"}),
+    Key({modkey}, "Escape", awful.tag.history.restore, {description = "go back", group = "tag"}),
+    Key(
+        {modkey}, "j",
         function ()
             awful.client.focus.byidx( 1)
         end,
         {description = "focus next by index", group = "client"}
     ),
-    Key({ modkey,           }, "k",
+    Key({ modkey}, "k",
         function ()
             awful.client.focus.byidx(-1)
         end,
         {description = "focus previous by index", group = "client"}
     ),
-    Key({ modkey,           }, "w", function () mymainmenu:show() end,
+    Key({modkey}, "w", function () mymainmenu:show() end,
               {description = "show main menu", group = "awesome"}),
 
     -- Layout manipulation
-    Key({ modkey, "Shift"   }, "j", function () awful.client.swap.byidx(  1)    end,
-              {description = "swap with next client by index", group = "client"}),
+    Key(
+        {modkey, "Shift"},
+        "j",
+        function () awful.client.swap.byidx(  1) end,
+        {description = "swap with next client by index", group = "client"}
+    ),
     Key({ modkey, "Shift"   }, "k", function () awful.client.swap.byidx( -1)    end,
               {description = "swap with previous client by index", group = "client"}),
     Key({ modkey, "Control" }, "j", function () awful.screen.focus_relative( 1) end,
@@ -67,8 +65,6 @@ globalkeys = gears.table.join(
     Volume_Control[1],
     Volume_Control[2],
     Volume_Control[3],
-
-    -- brightness
     Brightness_Control[1],
     Brightness_Control[2],
 
@@ -89,38 +85,41 @@ globalkeys = gears.table.join(
               {description = "increase the number of columns", group = "layout"}),
     Key({ modkey, "Control" }, "l",     function () awful.tag.incncol(-1, nil, true)    end,
               {description = "decrease the number of columns", group = "layout"}),
-    Key({ modkey,           }, "space", function () awful.layout.inc( 1)                end,
+    Key({modkey,           }, "space", function () awful.layout.inc( 1)                end,
               {description = "select next", group = "layout"}),
-    Key({ modkey, "Shift"   }, "space", function () awful.layout.inc(-1)                end,
+    Key({modkey, "Shift"}, "space", function () awful.layout.inc(-1)                end,
               {description = "select previous", group = "layout"}),
 
-    Key({ modkey, "Control" }, "n",
-              function ()
-                  local c = awful.client.restore()
-                  -- Focus restored client
-                  if c then
-                    c:emit_signal(
-                        "request::activate", "key.unminimize", {raise = true}
-                    )
-                  end
-              end,
-              {description = "restore minimized", group = "client"}),
+    Key(
+        { modkey, "Control" },
+        "n",
+        function ()
+            local c = awful.client.restore()
+            -- Focus restored client
+            if c then
+            c:emit_signal(
+                "request::activate", "key.unminimize", {raise = true}
+            )
+            end
+        end,
+        {description = "restore minimized", group = "client"}
+    )
 
-    -- Prompt
-    Key({ modkey },            "r",     function () awful.screen.focused().mypromptbox:run() end,
-              {description = "run prompt", group = "launcher"}),
+    -- -- Prompt
+    -- Key({ modkey },            "r",     function () awful.screen.focused().mypromptbox:run() end,
+    --           {description = "run prompt", group = "launcher"}),
 
-    Key({ modkey }, "x",
-              function ()
-                  awful.prompt.run {
-                    prompt       = "Run Lua code: ",
-                    textbox      = awful.screen.focused().mypromptbox.widget,
-                    exe_callback = awful.util.eval,
-                    history_path = awful.util.get_cache_dir() .. "/history_eval"
-                  }
-              end,
-              {description = "lua execute prompt", group = "awesome"}),
+    -- Key({ modkey }, "x",
+    --           function ()
+    --               awful.prompt.run {
+    --                 prompt       = "Run Lua code: ",
+    --                 textbox      = awful.screen.focused().mypromptbox.widget,
+    --                 exe_callback = awful.util.eval,
+    --                 history_path = awful.util.get_cache_dir() .. "/history_eval"
+    --               }
+    --           end,
+    --           {description = "lua execute prompt", group = "awesome"}),
     -- Menubar
-    Key({ modkey }, "p", function() menubar.show() end,
-              {description = "show the menubar", group = "launcher"})
+    -- Key({ modkey }, "p", function() menubar.show() end,
+    --           {description = "show the menubar", group = "launcher"})
 )
