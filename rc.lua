@@ -10,34 +10,22 @@
 -- If LuaRocks is installed, make sure that packages installed through it are
 -- found (e.g. lgi). If LuaRocks is not installed, do nothing.
 pcall(require, "luarocks.loader")
-
--- Standard awesome library
 local gears = require("gears")
 local awful = require("awful")
 require("awful.autofocus")
--- Widget and layout library
 local wibox = require("wibox")
--- Theme handling library
 local beautiful = require("beautiful")
--- Notification library
---local naughty = require("naughty")
 local menubar = require("menubar")
 local hotkeys_popup = require("awful.hotkeys_popup")
 
-local dpi = beautiful.xresources.apply_dpi
-
-require('menu_bar.setup')
-
+require('Left_Bar.setup')
+require('error_handling')
 -- Enable hotkeys help widget for VIM and other apps
 -- when client with a matching name is opened:
 require("awful.hotkeys_popup.keys")
 
 -- {{{ Variable definitions
--- Themes define colours, icons, font and wallpapers.
---beautiful.init(gears.filesystem.get_themes_dir() .. "default/theme.lua")
 beautiful.init('/home/cold/.config/awesome/theme/theme.lua')
-
--- This is used later as the default terminal and editor to run.
 terminal = "kitty"
 browser = "firefox"
 files_manager = "thunar"
@@ -61,13 +49,6 @@ myawesomemenu = {
    { "Restart", awesome.restart },
    { "Quit", function() awesome.quit() end },
 }
-
--- Theme Awesome Menu
-beautiful.menu_height = 30
-beautiful.menu_width = 220
-beautiful.menu_bg_normal = "#1D2025"
-beautiful.menu_bg_focus = "#282c34"
-beautiful.menu_fg_focus = "#CCCCCC"
 
 mymainmenu = awful.menu({
   items = {
@@ -206,79 +187,8 @@ awful.screen.connect_for_each_screen(function(s)
 
 end)
 -- }}}
-
-require('Bindings.mouse_bindings')
-
 -- {{{ Key bindings
-require('Bindings.global_keys')
-require('Bindings.client_keys')
-
--- Bind all key numbers to tags.
--- Be careful: we use keycodes to make it work on any keyboard layout.
--- This should map on the top row of your keyboard, usually 1 to 9.
-for i = 1, 9 do
-    globalkeys = gears.table.join(globalkeys,
-        -- View tag only.
-        awful.key({ modkey }, "#" .. i + 9,
-                  function ()
-                        local screen = awful.screen.focused()
-                        local tag = screen.tags[i]
-                        if tag then
-                           tag:view_only()
-                        end
-                  end,
-                  {description = "view tag #"..i, group = "tag"}),
-        -- Toggle tag display.
-        awful.key({ modkey, "Control" }, "#" .. i + 9,
-                  function ()
-                      local screen = awful.screen.focused()
-                      local tag = screen.tags[i]
-                      if tag then
-                         awful.tag.viewtoggle(tag)
-                      end
-                  end,
-                  {description = "toggle tag #" .. i, group = "tag"}),
-        -- Move client to tag.
-        awful.key({ modkey, "Shift" }, "#" .. i + 9,
-                  function ()
-                      if client.focus then
-                          local tag = client.focus.screen.tags[i]
-                          if tag then
-                              client.focus:move_to_tag(tag)
-                          end
-                     end
-                  end,
-                  {description = "move focused client to tag #"..i, group = "tag"}),
-        -- Toggle tag on focused client.
-        awful.key({ modkey, "Control", "Shift" }, "#" .. i + 9,
-                  function ()
-                      if client.focus then
-                          local tag = client.focus.screen.tags[i]
-                          if tag then
-                              client.focus:toggle_tag(tag)
-                          end
-                      end
-                  end,
-                  {description = "toggle focused client on tag #" .. i, group = "tag"})
-    )
-end
-
-clientbuttons = gears.table.join(
-    awful.button({ }, 1, function (c)
-        c:emit_signal("request::activate", "mouse_click", {raise = true})
-    end),
-    awful.button({ modkey }, 1, function (c)
-        c:emit_signal("request::activate", "mouse_click", {raise = true})
-        awful.mouse.client.move(c)
-    end),
-    awful.button({ modkey }, 3, function (c)
-        c:emit_signal("request::activate", "mouse_click", {raise = true})
-        awful.mouse.client.resize(c)
-    end)
-)
-
--- Set keys
-root.keys(globalkeys)
+require('Bindings')
 -- }}}
 
 -- {{{ Rules
