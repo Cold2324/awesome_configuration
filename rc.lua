@@ -17,19 +17,8 @@ local beautiful = require("beautiful")
 local menubar = require("menubar")
 local hotkeys_popup = require("awful.hotkeys_popup")
 
--- Global Variables
-user = 'cold'
-config_directory = '/home/' .. user .. '/.config/awesome'
-terminal = "kitty"
-browser = "firefox"
-files_manager = "thunar"
-editor = "/usr/bin/nvim"
-editor_cmd = terminal .. " -e " .. editor
-modkey = "Mod1"
--- Global Variables
-
 local widgets = require('widgets')
-
+require('configs.const_variables')
 require('Left_Bar.create_left_wibox')
 require('configs.error_handling')
 -- Enable hotkeys help widget for VIM and other apps
@@ -79,26 +68,26 @@ menubar.utils.terminal = terminal -- Set the terminal for applications that requ
 
 -- {{{ Wibar
 -- borders rounded
-newshape = function (cr, width, height)
-  gears.shape.rounded_rect(cr, width, height, 12)
-end
-
--- local function set_wallpaper(s)
---     -- Wallpaper
---     if beautiful.wallpaper then
---         local wallpaper = beautiful.wallpaper
---         -- If wallpaper is a function, call it with the screen
---         if type(wallpaper) == "function" then
---             wallpaper = wallpaper(s)
---         end
---         gears.wallpaper.maximized(wallpaper, s, true)
---     end
+-- newshape = function (cr, width, height)
+--   gears.shape.rounded_rect(cr, width, height, 12)
 -- end
+
+local function set_wallpaper(s)
+    -- Wallpaper
+    if beautiful.wallpaper then
+        local wallpaper = beautiful.wallpaper
+        -- If wallpaper is a function, call it with the screen
+        if type(wallpaper) == "function" then
+            wallpaper = wallpaper(s)
+        end
+        gears.wallpaper.maximized(wallpaper, s, true)
+    end
+end
 
 awful.screen.connect_for_each_screen(
     function(s)
         -- Wallpaper
-        --set_wallpaper(s)
+        set_wallpaper(s)
         -- Create a promptbox for each screen
         --s.mypromptbox = awful.widget.prompt()
         -- Create an imagebox widget which will contain an icon indicating which layout we're using.

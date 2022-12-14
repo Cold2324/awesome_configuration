@@ -1,6 +1,11 @@
 local awful = require('awful')
 local wibox = require('wibox')
+local gears = require('gears')
 local setup = require('Left_Bar.setup')
+
+create_border_radius = function (cr, width, height)
+  gears.shape.rounded_rect(cr, width, height, 12)
+end
 
 function create_left_wibox(s)
     -- Create the wibox
@@ -12,7 +17,7 @@ function create_left_wibox(s)
       height = 720,
       border_color = "#1D2025",
       border_width = 10,
-      shape = newshape
+      shape = create_border_radius
     })
 
     -- Wibar Placement
