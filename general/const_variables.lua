@@ -6,3 +6,4 @@ files_manager = "thunar"
 editor = "/usr/bin/nvim"
 editor_cmd = terminal .. " -e " .. editor
 modkey = "Mod4"
+vscode = "/usr/bin/code"

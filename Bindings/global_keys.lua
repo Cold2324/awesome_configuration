@@ -2,6 +2,7 @@ local gears = require('gears')
 local awful = require('awful')
 local Key = require('awful.key')
 local hotkeys_popup = require("awful.hotkeys_popup")
+local screen_menu = require('utils.screen_menu')
 
 local Volume_Control = {
     Key({}, "XF86AudioRaiseVolume", function() awful.spawn("pactl set-sink-volume @DEFAULT_SINK@ +5%") end,
