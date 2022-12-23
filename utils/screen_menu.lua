@@ -16,7 +16,8 @@ local programs_menu = {
 
 local system_menu = {
   { "Latam keyboard", function() os.execute('setxkbmap latam') end },
-  { "Us keyboard", function() os.execute('setxkbmap us') end }
+  { "Us keyboard", function() os.execute('setxkbmap us') end },
+  { "Manage Wifi", function() os.execute('kitty nmtui &') end}
 }
 
 screen_menu = awful.menu({

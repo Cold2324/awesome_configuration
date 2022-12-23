@@ -1,1 +1,3 @@
-setxkbmap us
+#!/bin/bash
+setxkbmap us &
+nm-applet &
