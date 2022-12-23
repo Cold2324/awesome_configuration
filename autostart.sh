@@ -2,4 +2,5 @@
 setxkbmap us &
 blueman-applet &
 nm-applet &
+volumeicon &
 cbatticon &
