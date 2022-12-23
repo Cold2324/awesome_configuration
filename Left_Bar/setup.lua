@@ -1,7 +1,6 @@
 local widgets = require('widgets')
 local awful = require('awful')
 local gears = require('gears')
-require('widgets.wifi')
 
 local function set_left_widgets(s, wibox)
   local system_menu = awful.menu({
@@ -57,23 +56,17 @@ local function set_right_widget(s, wibox)
 
   local right_widget = {
     layout = wibox.layout.fixed.vertical,
-    widgets.systray(),
-    -- widgets.wifi,
-    {
-      widget = wibox.container.margin,
-      top = 5,
-      bottom = 5
-    },
+    -- systray
     {
       {
-        battery,
-        top = 12,
-        bottom = 12,
+        widgets.systray(),
+        top = 5,
+        bottom = 5,
         widget = wibox.container.margin
       },
       bg = '#282C34',
-      widget = wibox.container.background,
-      shape = gears.shape.rounded_rect
+      shape = gears.shape.rounded_rect,
+      widget = wibox.container.background
     },
     {
       widget = wibox.container.margin,

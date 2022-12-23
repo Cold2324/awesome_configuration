@@ -9,6 +9,5 @@ W.systray = require('widgets.systray')
 W.tasklist = require('widgets.tasklist')
 W.taglist = require('widgets.taglist')
 W.layoutbox = require('widgets.layoutbox')
-W.wifi = require('widgets.wifi')
 
 return W

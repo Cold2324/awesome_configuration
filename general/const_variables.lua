@@ -5,5 +5,5 @@ browser = "firefox"
 files_manager = "thunar"
 editor = "/usr/bin/nvim"
 editor_cmd = terminal .. " -e " .. editor
-modkey = "Mod1"
+modkey = "Mod4"
 vscode = "/usr/bin/code"
