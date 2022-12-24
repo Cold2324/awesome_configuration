@@ -5,17 +5,17 @@ local gears = require('gears')
 local function set_left_widgets(s, wibox)
   local system_menu = awful.menu({
     items = {
-      { "  Quick Awesome", function() awesome.quit() end},
-      { "  Reboot", 'systemctl reboot'},
-      { " ⏻ Power Off", 'systemctl poweroff'}
+      { "  Quick Awesome", function() awesome.quit() end },
+      { "  Reboot", 'systemctl reboot' },
+      { " ⏻ Power Off", 'systemctl poweroff' }
     }
   })
-  
+
   local system_launcher = awful.widget.launcher({
     image = config_directory .. '/assets/power_off.png',
     menu = system_menu
   })
-  
+
   local left_widget = {
     system_launcher,
     {
@@ -44,16 +44,6 @@ local function set_left_widgets(s, wibox)
 end
 
 local function set_right_widget(s, wibox)
-  local battery = {
-    widgets.battery {
-      ac_prefix = '',
-      widget_font = 'Hack 12',
-      battery_prefix = ''
-    },
-    direction = "east",
-    widget = wibox.container.rotate
-  }
-
   local right_widget = {
     layout = wibox.layout.fixed.vertical,
     -- systray
@@ -101,13 +91,13 @@ end
 function setup_menu(s, wibox)
   -- Add widgets to the wibox
   s.mywibox:setup {
-      layout = wibox.layout.align.vertical,
-      -- spacing = 10,
-      set_left_widgets(s, wibox),
-      {
-        layout = widgets.separator() -- Middle widget
-      },
-      set_right_widget(s, wibox)
+    layout = wibox.layout.align.vertical,
+    -- spacing = 10,
+    set_left_widgets(s, wibox),
+    {
+      layout = widgets.separator() -- Middle widget
+    },
+    set_right_widget(s, wibox)
   }
 end
 
