@@ -1,7 +1,7 @@
 #!/bin/bash
-setxkbmap us &
+
+wait setxkbmap us &
 blueman-applet &
 volumeicon &
 nm-applet &
-volumeicon &
 cbatticon &
