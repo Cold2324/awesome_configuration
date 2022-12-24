@@ -7,6 +7,7 @@ local function set_left_widgets(s, wibox)
     items = {
       { "  Quick Awesome", function() awesome.quit() end },
       { "  Reboot", 'systemctl reboot' },
+      { " ⏾ Suspend", 'systemctl suspend' },
       { " ⏻ Power Off", 'systemctl poweroff' }
     }
   })
