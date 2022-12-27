@@ -1,6 +1,6 @@
 user = 'cold'
 config_directory = '/home/' .. user .. '/.config/awesome'
-terminal = "kitty"
+terminal = "alacritty"
 browser = "firefox"
 files_manager = "thunar"
 editor = "/usr/bin/nvim"
